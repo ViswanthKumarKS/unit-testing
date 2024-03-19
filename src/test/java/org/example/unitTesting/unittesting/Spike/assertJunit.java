@@ -23,7 +23,7 @@ public class assertJunit {
         assertThat("").isEmpty();
         assertThat("ABCDEF").contains("ABCD")
                 .startsWith("ABCD")
-                .endsWith("EFG");
+                .endsWith("DEF");
 
 
 
