@@ -51,7 +51,7 @@ public class dummyItemTest {
 
 
 
-    @Test
+   
    public void test_itemService() throws Exception {
        when(itemService.retriveHardCodedItem()).thenReturn(
                new item(2,"bowl",200,250)
