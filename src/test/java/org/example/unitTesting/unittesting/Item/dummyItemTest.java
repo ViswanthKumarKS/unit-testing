@@ -51,19 +51,20 @@ public class dummyItemTest {
 
 
 
-//    public void test_itemService() throws Exception {
-//        when(itemService.retriveHardCodedItem()).thenReturn(
-//                new item(2,"bowl",200,250)
-//        );
-//        RequestBuilder request = MockMvcRequestBuilders
-//                .get("/dummy_item_service")
-//                .accept(MediaType.APPLICATION_JSON);
-//        MvcResult result = mockMvc.perform(request)
-//                .andExpect(status().isOk())
-//                .andReturn();
-//        assertEquals("{\"id\":2,\"name\":\"bowl\",\"price\":200,\"quantity\":250}",result.getResponse().getContentAsString());
-//
-//    }
+    @Test
+   public void test_itemService() throws Exception {
+       when(itemService.retriveHardCodedItem()).thenReturn(
+               new item(2,"bowl",200,250)
+       );
+       RequestBuilder request = MockMvcRequestBuilders
+               .get("/dummy_item_service")
+               .accept(MediaType.APPLICATION_JSON);
+       MvcResult result = mockMvc.perform(request)
+               .andExpect(status().isOk())
+               .andReturn();
+       assertEquals("{\"id\":2,\"name\":\"bowl\",\"price\":200,\"quantity\":250}",result.getResponse().getContentAsString());
+
+   }
 
     @Test
     public void test_allitems() throws Exception {
