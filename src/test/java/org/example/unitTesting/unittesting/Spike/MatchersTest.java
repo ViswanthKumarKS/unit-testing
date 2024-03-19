@@ -19,6 +19,6 @@ public class MatchersTest {
         List<Integer> number=Arrays.asList(12,13,14,15);
 
         assertThat(number, hasSize(4));
-        assertThat(number,hasItems(12,14));
+        assertThat(number,hasItems(12,24));
     }
 }
