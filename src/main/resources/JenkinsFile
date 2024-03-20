@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                // Example: Checkout source code from a Git repository
+                git 'https://github.com/yourusername/yourrepository.git'
+
+                // Example: Build your project using Maven
+                sh 'mvn clean install'
+            }
+        }
+        stage('Test') {
+            steps {
+                // Example: Run unit tests
+                sh 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                // Example: Deploy your application to a server
+                sh 'scp target/yourapp.war user@server:/path/to/deploy'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Example: Cleanup steps that should always run
+            deleteDir()
+        }
+        success {
+            // Example: Send a success notification
+            echo 'Pipeline succeeded! 🎉'
+        }
+        failure {
+            // Example: Send a failure notification
+            echo 'Pipeline failed! 😞'
+        }
+    }
+}
