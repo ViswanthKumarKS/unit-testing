@@ -71,9 +71,8 @@ github()
         }
     }
 
-void github(){
-   // Checkout the source code from your version control system
-                git 'https://github.com/ViswanthKumarKS/unit-testing.git'
-
-}
+void github() {
+        // Checkout the source code from your GitHub repository
+        git branch: 'master', url: 'https://github.com/ViswanthKumarKS/unit-testing.git'
+    }
 }
