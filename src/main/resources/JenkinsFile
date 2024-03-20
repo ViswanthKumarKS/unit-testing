@@ -13,6 +13,12 @@ parameters{
             }
         }
         stage('Build') {
+ when {
+        expression {
+            // Check if RELEASE parameter is true
+            return params.RELEASE == true
+        }
+}
             steps {
                 // Build the project using Maven
                 bat 'mvn clean package'
@@ -26,12 +32,7 @@ parameters{
         }
        stage('Deploy') {
 
- when {
-        expression {
-            // Check if RELEASE parameter is true
-            return params.RELEASE == true
-        }
-}
+
     steps {
         script {
             // Prompt for confirmation
