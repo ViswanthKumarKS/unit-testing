@@ -8,8 +8,8 @@ parameters{
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the source code from your version control system
-                git 'https://github.com/ViswanthKumarKS/unit-testing.git'
+github()
+             
             }
         }
         stage('Build') {
@@ -70,4 +70,10 @@ parameters{
             echo 'Pipeline failed!'
         }
     }
+
+github(){
+   // Checkout the source code from your version control system
+                git 'https://github.com/ViswanthKumarKS/unit-testing.git'
+
+}
 }
