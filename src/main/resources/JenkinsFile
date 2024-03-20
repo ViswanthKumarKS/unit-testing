@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the source code from your version control system
-                git 'your_repository_url'
+                git 'https://github.com/ViswanthKumarKS/unit-testing.git'
             }
         }
         stage('Build') {
