@@ -1,11 +1,15 @@
 pipeline {
     agent any
 
+environment{
+MY_ENV_VAR='some_value'
+}
+
     stages {
         stage('Build') {
             steps {
                 // Example: Checkout source code from a Git repository
-                git 'https://github.com/yourusername/yourrepository.git'
+                git 'https://github.com/ViswanthKumarKS/unit-testing.git'
 
                 // Example: Build your project using Maven
                 sh 'mvn clean install'
@@ -14,28 +18,28 @@ pipeline {
         stage('Test') {
             steps {
                 // Example: Run unit tests
-                sh 'mvn test'
+                sh 'echo "In test step"'
             }
         }
         stage('Deploy') {
             steps {
                 // Example: Deploy your application to a server
-                sh 'scp target/yourapp.war user@server:/path/to/deploy'
+                sh 'echo "Value of env variable"$""'
             }
         }
     }
 
     post {
         always {
-            // Example: Cleanup steps that should always run
+         
             deleteDir()
         }
         success {
-            // Example: Send a success notification
+         
             echo 'Pipeline succeeded! 🎉'
         }
         failure {
-            // Example: Send a failure notification
+          
             echo 'Pipeline failed! 😞'
         }
     }
