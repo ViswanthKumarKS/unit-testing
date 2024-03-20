@@ -4,20 +4,43 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/ViswanthKumarKS/unit-testing.git'
+                // Checkout the source code from your version control system
+                git 'your_repository_url'
             }
         }
         stage('Build') {
             steps {
-               echo 'javac HelloWorldControllerTest.java'
+                // Build the project using Maven
+                sh 'mvn clean package'
             }
         }
         stage('Test') {
             steps {
-                echo 'javac HelloWorldControllerTest.java'
-                echo 'java HelloWorldController' 
-
+                // Run tests using Maven
+                sh 'mvn test'
             }
+        }
+        stage('Deploy') {
+            steps {
+                // Example deployment step (modify as needed)
+                sh 'echo "Deploying..."'
+                // Add your deployment commands here
+            }
+        }
+    }
+    
+    post {
+        always {
+            // Cleanup steps, for example:
+            // sh 'mvn clean'
+        }
+        success {
+            // Actions to take if the pipeline succeeds
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            // Actions to take if the pipeline fails
+            echo 'Pipeline failed!'
         }
     }
 }
