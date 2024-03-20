@@ -1,47 +1,21 @@
 pipeline {
     agent any
-
-environment{
-MY_ENV_VAR='some_value'
-}
-
+    
     stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/ViswanthKumarKS/unit-testing.git'
+            }
+        }
         stage('Build') {
             steps {
-                // Example: Checkout source code from a Git repository
-            def gitRepoUrl='https://github.com/ViswanthKumarKS/unit-testing.git'
-                
-                // Example: Build your project using Maven
-                sh 'mvn clean install'
+                echo 'javac HelloWorld.java'
             }
         }
         stage('Test') {
             steps {
-                // Example: Run unit tests
-                sh 'echo "In test step"'
+                echo 'java HelloWorld'
             }
-        }
-        stage('Deploy') {
-            steps {
-                // Example: Deploy your application to a server
-                sh 'echo "Value of env variable %MY_ENV_VAR%"'
-            }
-        }
-    }
-    
-    post {
-        always {
-            // Example: Cleanup steps that should always run
-            deleteDir()
-        }
-        success {
-            // Example: Send a success notification
-            echo 'Pipeline succeeded! 🎉'
-        }
-        failure {
-            // Example: Send a failure notification
-            echo 'Pipeline failed! 😞'
         }
     }
 }
-
