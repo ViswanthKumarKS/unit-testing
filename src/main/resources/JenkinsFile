@@ -11,19 +11,19 @@ pipeline {
         stage('Build') {
             steps {
                 // Build the project using Maven
-                sh 'mvn clean package'
+                bat 'mvn clean package'
             }
         }
         stage('Test') {
             steps {
                 // Run tests using Maven
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
         stage('Deploy') {
             steps {
                 // Example deployment step (modify as needed)
-                sh 'echo "Deploying..."'
+                 bat 'echo "Deploying..."'
                 // Add your deployment commands here
             }
         }
