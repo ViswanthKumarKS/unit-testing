@@ -25,6 +25,12 @@ parameters{
             }
         }
        stage('Deploy') {
+
+ when {
+        expression {
+            // Check if RELEASE parameter is true
+            return params.RELEASE == true
+        }
     steps {
         script {
             // Prompt for confirmation
