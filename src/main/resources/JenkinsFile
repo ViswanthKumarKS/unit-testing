@@ -9,12 +9,14 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'javac HelloWorld.java'
+               echo 'javac HelloWorldControllerTest.java'
             }
         }
         stage('Test') {
             steps {
-                echo 'java HelloWorld'
+                echo 'javac HelloWorldControllerTest.java'
+                echo 'java HelloWorldController' 
+
             }
         }
     }
