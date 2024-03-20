@@ -20,13 +20,31 @@ pipeline {
                 bat 'mvn test'
             }
         }
-        stage('Deploy') {
-            steps {
-                // Example deployment step (modify as needed)
-                 bat 'echo "Deploying..."'
+       stage('Deploy') {
+    steps {
+        script {
+            // Prompt for confirmation
+            def userInput = input(
+                id: 'deployPrompt', 
+                message: 'Do you want to proceed with deployment?', 
+                parameters: [
+                    [$class: 'BooleanParameterDefinition', defaultValue: true, description: 'Proceed with deployment?', name: 'Proceed']
+                ]
+            )
+            
+            // Check user input
+            if (userInput) {
+                // Deployment steps
+                bat 'echo "Deploying..."'
                 // Add your deployment commands here
+            } else {
+                // Abort deployment
+                error("Deployment aborted by user.")
             }
         }
+    }
+}
+
     }
     
     post {
