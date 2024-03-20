@@ -1,45 +1,45 @@
 pipeline {
     agent any
 
-environment{
-MY_ENV_VAR='some_value'
-}
+    environment {
+        MY_ENV_VAR = 'some_value'
+    }
 
     stages {
         stage('Build') {
             steps {
                 // Example: Checkout source code from a Git repository
-                git 'https://github.com/ViswanthKumarKS/unit-testing.git'
+                bat 'git clone https://github.com/ViswanthKumarKS/unit-testing.git'
 
                 // Example: Build your project using Maven
-                sh 'mvn clean install'
+                bat 'mvn clean install'
             }
         }
         stage('Test') {
             steps {
                 // Example: Run unit tests
-                sh 'echo "In test step"'
+                bat 'echo "In test step"'
             }
         }
         stage('Deploy') {
             steps {
                 // Example: Deploy your application to a server
-                sh 'echo "Value of env variable"$""'
+                bat 'echo "Value of env variable %MY_ENV_VAR%"'
             }
         }
     }
 
     post {
         always {
-         
+            // Example: Cleanup steps that should always run
             deleteDir()
         }
         success {
-         
+            // Example: Send a success notification
             echo 'Pipeline succeeded! 🎉'
         }
         failure {
-          
+            // Example: Send a failure notification
             echo 'Pipeline failed! 😞'
         }
     }
