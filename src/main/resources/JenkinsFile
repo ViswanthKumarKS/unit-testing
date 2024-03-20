@@ -8,9 +8,9 @@ parameters{
     stages {
         stage('Checkout') {
             steps {
- script {
-                    github()
-                }
+ 
+                   git branch: 'master', url: 'https://github.com/ViswanthKumarKS/unit-testing.git'
+              
              
             }
         }
@@ -73,8 +73,4 @@ parameters{
         }
     }
 
-def github() {
-        // Checkout the source code from your GitHub repository
-        git branch: 'master', url: 'https://github.com/ViswanthKumarKS/unit-testing.git'
-    }
 }
