@@ -1,26 +1,28 @@
+def gitCheckout(branch, repositoryUrl) {
+    // Checkout the repository
+    git branch: branch, url: repositoryUrl
+}
+
 pipeline {
     agent any
 
-parameters{
-      booleanParam(name:'RELEASE',defaultValue:false)
-}
-    
+    parameters {
+        booleanParam(name: 'RELEASE', defaultValue: false)
+    }
+
     stages {
         stage('Checkout') {
             steps {
- 
-                   git branch: 'master', url: 'https://github.com/ViswanthKumarKS/unit-testing.git'
-              
-             
+                gitCheckout('master', 'https://github.com/ViswanthKumarKS/unit-testing.git')
             }
         }
         stage('Build') {
- when {
-        expression {
-            // Check if RELEASE parameter is true
-            return params.RELEASE == true
-        }
-}
+            when {
+                expression {
+                    // Check if RELEASE parameter is true
+                    return params.RELEASE == true
+                }
+            }
             steps {
                 // Build the project using Maven
                 bat 'mvn clean package'
@@ -32,37 +34,33 @@ parameters{
                 bat 'mvn test'
             }
         }
-       stage('Deploy') {
+        stage('Deploy') {
+            steps {
+                script {
+                    // Prompt for confirmation
+                    def userInput = input(
+                        id: 'deployPrompt',
+                        message: 'Do you want to proceed with deployment?',
+                        parameters: [
+                            [$class: 'BooleanParameterDefinition', defaultValue: true, description: 'Proceed with deployment?', name: 'Proceed']
+                        ]
+                    )
 
-
-    steps {
-        script {
-            // Prompt for confirmation
-            def userInput = input(
-                id: 'deployPrompt', 
-                message: 'Do you want to proceed with deployment?', 
-                parameters: [
-                    [$class: 'BooleanParameterDefinition', defaultValue: true, description: 'Proceed with deployment?', name: 'Proceed']
-                ]
-            )
-            
-            // Check user input
-            if (userInput) {
-                // Deployment steps
-                bat 'echo "Deploying..."'
-                // Add your deployment commands here
-            } else {
-                // Abort deployment
-                error("Deployment aborted by user.")
+                    // Check user input
+                    if (userInput) {
+                        // Deployment steps
+                        bat 'echo "Deploying..."'
+                        // Add your deployment commands here
+                    } else {
+                        // Abort deployment
+                        error("Deployment aborted by user.")
+                    }
+                }
             }
         }
     }
-}
 
-    }
-    
     post {
-        
         success {
             // Actions to take if the pipeline succeeds
             echo 'Pipeline succeeded!'
@@ -72,5 +70,4 @@ parameters{
             echo 'Pipeline failed!'
         }
     }
-
 }
