@@ -1,34 +1,34 @@
 pipeline {
     agent any
 
-    environment {
-        MY_ENV_VAR = 'some_value'
-    }
+environment{
+MY_ENV_VAR='some_value'
+}
 
     stages {
         stage('Build') {
             steps {
                 // Example: Checkout source code from a Git repository
-                bat 'git clone https://github.com/ViswanthKumarKS/unit-testing.git'
-
+            def gitRepoUrl='https://github.com/ViswanthKumarKS/unit-testing.git'
+                
                 // Example: Build your project using Maven
-                bat 'mvn clean install'
+                sh 'mvn clean install'
             }
         }
         stage('Test') {
             steps {
                 // Example: Run unit tests
-                bat 'echo "In test step"'
+                sh 'echo "In test step"'
             }
         }
         stage('Deploy') {
             steps {
                 // Example: Deploy your application to a server
-                bat 'echo "Value of env variable %MY_ENV_VAR%"'
+                sh 'echo "Value of env variable %MY_ENV_VAR%"'
             }
         }
     }
-
+    
     post {
         always {
             // Example: Cleanup steps that should always run
@@ -44,3 +44,4 @@ pipeline {
         }
     }
 }
+
