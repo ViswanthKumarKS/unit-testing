@@ -30,10 +30,7 @@ pipeline {
     }
     
     post {
-        always {
-            // Cleanup steps, for example:
-            // sh 'mvn clean'
-        }
+        
         success {
             // Actions to take if the pipeline succeeds
             echo 'Pipeline succeeded!'
