@@ -4,7 +4,11 @@ def gitCheckout(branch, repositoryUrl) {
 }
 
 pipeline {
-    agent any
+    agent {
+docker{
+image 'maven:latest'
+}
+}
 
     parameters {
         booleanParam(name: 'RELEASE', defaultValue: false)
